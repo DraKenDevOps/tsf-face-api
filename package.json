@@ -1,0 +1,83 @@
+{
+  "name": "tsf-face-api",
+  "version": "1.0.0",
+  "description": "TypeScript API for face detection and face recognition in browser and Node.js with TensorFlow.js 4.x",
+  "type": "module",
+  "main": "./build/commonjs/index.js",
+  "module": "./build/es6/index.js",
+  "types": "./build/commonjs/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./build/es6/index.d.ts",
+      "import": "./build/es6/index.js",
+      "require": {
+        "types": "./build/commonjs/index.d.ts",
+        "default": "./build/commonjs/index.js"
+      }
+    }
+  },
+  "files": [
+    "build",
+    "dist",
+    "src",
+    "weights"
+  ],
+  "scripts": {
+    "clean": "node -e \"fs.rmSync('./build', { recursive: true, force: true }); fs.rmSync('./dist', { recursive: true, force: true });\"",
+    "typecheck": "tsc --noEmit",
+    "rollup": "rollup -c rollup.config.mjs",
+    "rollup:min": "rollup -c rollup.config.mjs --environment minify:true",
+    "tsc:cjs": "tsc -p tsconfig.json",
+    "tsc:esm": "tsc -p tsconfig.es6.json",
+    "pretty": "prettier --write \"src/**/*.ts\"",
+    "build": "pnpm run clean && pnpm run rollup && pnpm run rollup:min && pnpm run tsc:cjs && pnpm run tsc:esm",
+    "test": "pnpm run test:node && pnpm run test:browser",
+    "test:node": "vitest run --project node",
+    "test:browser": "vitest run --project browser",
+    "docs": "typedoc --options ./typedoc.config.mjs ./src/index.ts"
+  },
+  "keywords": [
+    "face",
+    "detection",
+    "recognition",
+    "tensorflow",
+    "tfjs",
+    "typescript",
+    "ts-face-api"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@tensorflow/tfjs-backend-cpu": "^4.22.0",
+    "@tensorflow/tfjs-backend-webgl": "^4.22.0",
+    "@tensorflow/tfjs-core": "^4.22.0",
+    "tslib": "^2.8.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@tensorflow/tfjs-node": "^4.22.0",
+    "@types/node": "^22.13.0",
+    "@vitest/browser": "^3.0.0",
+    "canvas": "^3.1.0",
+    "playwright": "^1.50.0",
+    "prettier": "^3.9.10",
+    "rollup": "^4.34.0",
+    "typedoc": "^0.27.0",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.0"
+  },
+  "peerDependencies": {
+    "@tensorflow/tfjs-node": ">=4.0.0",
+    "canvas": ">=2.11.0 || >=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@tensorflow/tfjs-node": {
+      "optional": true
+    },
+    "canvas": {
+      "optional": true
+    }
+  }
+}

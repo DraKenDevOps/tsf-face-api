@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "declaration": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noFallthroughCasesInSwitch": true,
+    "strictNullChecks": true,
+    "useUnknownInCatchVariables": false,
+    "importHelpers": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "outDir": "build/commonjs",
+    "module": "commonjs",
+    "target": "ES2020",
+    "moduleResolution": "node",
+    "lib": ["ES2020", "DOM"]
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "test"
+  ],
+  "include": [
+    "src"
+  ]
+}
