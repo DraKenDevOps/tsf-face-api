@@ -1,13 +1,15 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { fullyConnectedLayer } from "../common/fullyConnectedLayer";
-import { seperateWeightMaps } from "../faceProcessor/util";
+import { fullyConnectedLayer } from "../common";
+import { seperateWeightMaps } from "../utils";
 import { TinyXception } from "../xception/TinyXception";
 import { extractParams } from "./extractParams";
 import { extractParamsFromWeigthMap } from "./extractParamsFromWeigthMap";
-import { AgeAndGenderPrediction, Gender, NetOutput, NetParams } from "./types";
+import { NetOutput, NetParams } from "./types";
 import { NeuralNetwork } from "../NeuralNetwork";
-import { NetInput, TNetInput, toNetInput } from "../dom";
+import { NetInput } from "../dom/NetInput";
+import { toNetInput } from "../dom/toNetInput";
+import { TNetInput } from "../dom/types";
 
 export class AgeGenderNet extends NeuralNetwork<NetParams> {
   private _faceFeatureExtractor: TinyXception;
@@ -83,7 +85,7 @@ export class AgeGenderNet extends NeuralNetwork<NetParams> {
     return "age_gender_model";
   }
 
-  public dispose(throwOnRedispose: boolean = true) {
+  public dispose(throwOnRedispose = true) {
     this.faceFeatureExtractor.dispose(throwOnRedispose);
     super.dispose(throwOnRedispose);
   }

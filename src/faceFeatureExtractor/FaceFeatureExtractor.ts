@@ -1,12 +1,14 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { NetInput, TNetInput, toNetInput } from "../dom";
+import { NetInput } from "../dom/NetInput";
+import { toNetInput } from "../dom/toNetInput";
+import { TNetInput } from "../dom/types";
 import { NeuralNetwork } from "../NeuralNetwork";
-import { normalize } from "../ops";
 import { denseBlock4 } from "./denseBlock";
 import { extractParams } from "./extractParams";
 import { extractParamsFromWeigthMap } from "./extractParamsFromWeigthMap";
 import { FaceFeatureExtractorParams, IFaceFeatureExtractor } from "./types";
+import { opsNormalize } from "../utils";
 
 export class FaceFeatureExtractor extends NeuralNetwork<FaceFeatureExtractorParams> implements IFaceFeatureExtractor<FaceFeatureExtractorParams> {
   constructor() {
@@ -23,7 +25,7 @@ export class FaceFeatureExtractor extends NeuralNetwork<FaceFeatureExtractorPara
     return tf.tidy(() => {
       const batchTensor = input.toBatchTensor(112, true);
       const meanRgb = [122.782, 117.001, 104.298];
-      const normalized = tf.div(normalize(batchTensor, meanRgb), tf.scalar(255)) as tf.Tensor4D;
+      const normalized = tf.div(opsNormalize(batchTensor, meanRgb), tf.scalar(255)) as tf.Tensor4D;
 
       let out = denseBlock4(normalized, params.dense0, true);
       out = denseBlock4(out, params.dense1);

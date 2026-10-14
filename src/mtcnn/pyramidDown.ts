@@ -1,4 +1,4 @@
-import { CELL_SIZE } from "./config";
+import { CELL_SIZE } from "../utils/config";
 
 export function pyramidDown(minFaceSize: number, scaleFactor: number, dims: number[]): number[] {
   const [height, width] = dims;

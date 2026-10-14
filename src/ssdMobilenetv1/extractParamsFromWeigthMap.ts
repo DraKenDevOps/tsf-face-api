@@ -1,6 +1,7 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { ConvParams, disposeUnusedWeightTensors, extractWeightEntryFactory, ParamMapping } from "../common";
+import { disposeUnusedWeightTensors, extractWeightEntryFactory } from "../common";
+import { ConvParams } from "../common/types";
 import { isTensor3D } from "../utils";
 import { BoxPredictionParams, MobileNetV1, NetParams, PointwiseConvParams, PredictionLayerParams } from "./types";
 

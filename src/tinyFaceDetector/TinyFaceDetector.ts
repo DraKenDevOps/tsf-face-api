@@ -1,12 +1,11 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { FaceDetection, Point } from "../classes";
-import { ParamMapping } from "../common";
-import { TNetInput } from "../dom";
-import { ITinyYolov2Options } from "../tinyYolov2";
+import { FaceDetection } from "../classes/FaceDetection";
+import { Point } from "../classes/Point";
+import { TNetInput } from "../dom/types";
 import { TinyYolov2Base } from "../tinyYolov2/TinyYolov2Base";
 import { TinyYolov2NetParams } from "../tinyYolov2/types";
-import { BOX_ANCHORS, IOU_THRESHOLD, MEAN_RGB } from "./const";
+import { BOX_ANCHORS, IOU_THRESHOLD, MEAN_RGB } from "../utils/config";
 
 export class TinyFaceDetector extends TinyYolov2Base {
   constructor() {
@@ -39,4 +38,10 @@ export class TinyFaceDetector extends TinyYolov2Base {
   protected extractParamsFromWeigthMap(weightMap: tf.NamedTensorMap): { params: TinyYolov2NetParams; paramMappings: ParamMapping[] } {
     return super.extractParamsFromWeigthMap(weightMap);
   }
+}
+
+export function createTinyFaceDetector(weights: Float32Array) {
+  const net = new TinyFaceDetector();
+  net.extractWeights(weights);
+  return net;
 }

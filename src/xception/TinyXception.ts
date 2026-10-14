@@ -1,10 +1,12 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { ConvParams, depthwiseSeparableConv } from "../common";
-import { NetInput, TNetInput, toNetInput } from "../dom";
+import { depthwiseSeparableConv } from "../common";
+import { ConvParams } from "../common/types";
+import { NetInput } from "../dom/NetInput";
+import { toNetInput } from "../dom/toNetInput";
+import { TNetInput } from "../dom/types";
 import { NeuralNetwork } from "../NeuralNetwork";
-import { normalize } from "../ops";
-import { range } from "../utils";
+import { opsNormalize, range } from "../utils";
 import { extractParams } from "./extractParams";
 import { extractParamsFromWeigthMap } from "./extractParamsFromWeigthMap";
 import { MainBlockParams, ReductionBlockParams, TinyXceptionParams } from "./types";
@@ -13,7 +15,7 @@ function conv(x: tf.Tensor4D, params: ConvParams, stride: [number, number]): tf.
   return tf.add(tf.conv2d(x, params.filters, stride, "same"), params.bias);
 }
 
-function reductionBlock(x: tf.Tensor4D, params: ReductionBlockParams, isActivateInput: boolean = true): tf.Tensor4D {
+function reductionBlock(x: tf.Tensor4D, params: ReductionBlockParams, isActivateInput = true): tf.Tensor4D {
   let out = isActivateInput ? tf.relu(x) : x;
   out = depthwiseSeparableConv(out, params.separable_conv0, [1, 1]);
   out = depthwiseSeparableConv(tf.relu(out), params.separable_conv1, [1, 1]);
@@ -48,7 +50,7 @@ export class TinyXception extends NeuralNetwork<TinyXceptionParams> {
     return tf.tidy(() => {
       const batchTensor = input.toBatchTensor(112, true);
       const meanRgb = [122.782, 117.001, 104.298];
-      const normalized = tf.div(normalize(batchTensor, meanRgb), tf.scalar(256)) as tf.Tensor4D;
+      const normalized = tf.div(opsNormalize(batchTensor, meanRgb), tf.scalar(256)) as tf.Tensor4D;
 
       let out = tf.relu(conv(normalized, params.entry_flow.conv_in, [2, 2]));
       out = reductionBlock(out, params.entry_flow.reduction_block_0, false);

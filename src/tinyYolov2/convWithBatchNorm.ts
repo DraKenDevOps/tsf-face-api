@@ -1,6 +1,6 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { leaky } from "./leaky";
+import { leaky } from "../utils";
 import { ConvWithBatchNorm } from "./types";
 
 export function convWithBatchNorm(x: tf.Tensor4D, params: ConvWithBatchNorm): tf.Tensor4D {

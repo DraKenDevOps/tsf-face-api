@@ -1,5 +1,3 @@
-import { Environment } from "./types";
-
 export function createBrowserEnv(): Environment {
   const fetch = window.fetch
     ? window.fetch.bind(window)
@@ -20,6 +18,8 @@ export function createBrowserEnv(): Environment {
     createCanvasElement: () => document.createElement("canvas"),
     createImageElement: () => document.createElement("img"),
     fetch,
-    readFile
+    readFile,
+    name: "browser",
+    root: {} as FileSystemDirectoryEntry
   };
 }

@@ -2,7 +2,7 @@ import * as tf from "@tensorflow/tfjs-core";
 
 import { Dimensions } from "../classes/Dimensions";
 import { env } from "../env";
-import { padToSquare } from "../ops/padToSquare";
+import { padToSquare } from "../utils";
 import { computeReshapedDimensions, isTensor3D, isTensor4D, range } from "../utils";
 import { createCanvasFromMedia } from "./createCanvas";
 import { imageToSquare } from "./imageToSquare";
@@ -12,12 +12,12 @@ export class NetInput {
   private _imageTensors: Array<tf.Tensor3D | tf.Tensor4D> = [];
   private _canvases: HTMLCanvasElement[] = [];
   private _batchSize: number;
-  private _treatAsBatchInput: boolean = false;
+  private _treatAsBatchInput = false;
 
   private _inputDimensions: number[][] = [];
-  private _inputSize: number;
+  private _inputSize!: number;
 
-  constructor(inputs: Array<TResolvedNetInput>, treatAsBatchInput: boolean = false) {
+  constructor(inputs: Array<TResolvedNetInput>, treatAsBatchInput = false) {
     if (!Array.isArray(inputs)) {
       throw new Error(`NetInput.constructor - expected inputs to be an Array of TResolvedNetInput or to be instanceof tf.Tensor4D, instead have ${inputs}`);
     }
@@ -112,7 +112,7 @@ export class NetInput {
    * both sides of the minor dimension oof the image.
    * @returns The batch tensor.
    */
-  public toBatchTensor(inputSize: number, isCenterInputs: boolean = true): tf.Tensor4D {
+  public toBatchTensor(inputSize: number, isCenterInputs = true): tf.Tensor4D {
     this._inputSize = inputSize;
 
     return tf.tidy(() => {

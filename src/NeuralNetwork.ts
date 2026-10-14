@@ -1,9 +1,8 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { ParamMapping } from "./common";
-import { getModelUris } from "./common/getModelUris";
-import { loadWeightMap } from "./dom";
+import { loadWeightMap } from "./dom/loadWeightMap";
 import { env } from "./env";
+import { getModelUris } from "./utils";
 
 export abstract class NeuralNetwork<TNetParams> {
   protected _params: TNetParams | undefined = undefined;
@@ -61,7 +60,7 @@ export abstract class NeuralNetwork<TNetParams> {
     });
   }
 
-  public dispose(throwOnRedispose: boolean = true) {
+  public dispose(throwOnRedispose = true) {
     this.getParamList().forEach((param) => {
       if (throwOnRedispose && param.tensor.isDisposed) {
         throw new Error(`param tensor has already been disposed for path ${param.path}`);

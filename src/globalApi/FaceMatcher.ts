@@ -1,7 +1,6 @@
 import { FaceMatch } from "../classes/FaceMatch";
 import { LabeledFaceDescriptors } from "../classes/LabeledFaceDescriptors";
-import { euclideanDistance } from "../euclideanDistance";
-import { WithFaceDescriptor } from "../factories";
+import { euclideanDistance } from "../utils";
 
 export class FaceMatcher {
   private _labeledDescriptors: LabeledFaceDescriptors[];
@@ -9,7 +8,7 @@ export class FaceMatcher {
 
   constructor(
     inputs: LabeledFaceDescriptors | WithFaceDescriptor<any> | Float32Array | Array<LabeledFaceDescriptors | WithFaceDescriptor<any> | Float32Array>,
-    distanceThreshold: number = 0.6
+    distanceThreshold = 0.6
   ) {
     this._distanceThreshold = distanceThreshold;
 

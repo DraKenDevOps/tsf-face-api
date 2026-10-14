@@ -1,6 +1,6 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { scale } from "./scaleLayer";
+import { scale } from "../utils";
 import { ConvLayerParams } from "./types";
 
 function convLayer(x: tf.Tensor4D, params: ConvLayerParams, strides: [number, number], withRelu: boolean, padding: "valid" | "same" = "same"): tf.Tensor4D {

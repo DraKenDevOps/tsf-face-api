@@ -1,8 +1,3 @@
-export interface IPoint {
-  x: number;
-  y: number;
-}
-
 export class Point implements IPoint {
   private _x: number;
   private _y: number;

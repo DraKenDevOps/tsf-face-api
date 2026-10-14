@@ -1,7 +1,7 @@
 import { Box } from "../classes/Box";
 import { iou } from "./iou";
 
-export function nonMaxSuppression(boxes: Box[], scores: number[], iouThreshold: number, isIOU: boolean = true): number[] {
+export function nonMaxSuppression(boxes: Box[], scores: number[], iouThreshold: number, isIOU = true): number[] {
   let indicesSortedByScore = scores
     .map((score, boxIndex) => ({ score, boxIndex }))
     .sort((c1, c2) => c1.score - c2.score)

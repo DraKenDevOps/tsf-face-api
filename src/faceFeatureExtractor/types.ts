@@ -1,7 +1,8 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { NetInput, TNetInput } from "..";
-import { ConvParams, SeparableConvParams } from "../common";
+import { ConvParams, SeparableConvParams } from "../common/types";
+import { NetInput } from "../dom/NetInput";
+import { TNetInput } from "../dom/types";
 import { NeuralNetwork } from "../NeuralNetwork";
 
 export type ConvWithBatchNormParams = BatchNormParams & {

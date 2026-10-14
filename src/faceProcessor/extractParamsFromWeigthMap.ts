@@ -1,6 +1,7 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { disposeUnusedWeightTensors, extractWeightEntryFactory, FCParams, ParamMapping } from "../common";
+import { disposeUnusedWeightTensors, extractWeightEntryFactory } from "../common";
+import { FCParams } from "../common/types";
 import { NetParams } from "./types";
 
 export function extractParamsFromWeigthMap(weightMap: tf.NamedTensorMap): { params: NetParams; paramMappings: ParamMapping[] } {

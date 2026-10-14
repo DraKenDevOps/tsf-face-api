@@ -1,22 +1,5 @@
-import { IDimensions, IPoint } from "../classes";
 import { getContext2dOrThrow } from "../dom/getContext2dOrThrow";
 import { resolveInput } from "../dom/resolveInput";
-
-export enum AnchorPosition {
-  TOP_LEFT = "TOP_LEFT",
-  TOP_RIGHT = "TOP_RIGHT",
-  BOTTOM_LEFT = "BOTTOM_LEFT",
-  BOTTOM_RIGHT = "BOTTOM_RIGHT"
-}
-
-export interface IDrawTextFieldOptions {
-  anchorPosition?: AnchorPosition;
-  backgroundColor?: string;
-  fontColor?: string;
-  fontSize?: number;
-  fontStyle?: string;
-  padding?: number;
-}
 
 export class DrawTextFieldOptions implements IDrawTextFieldOptions {
   public anchorPosition: AnchorPosition;

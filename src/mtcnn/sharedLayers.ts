@@ -1,10 +1,10 @@
 import * as tf from "@tensorflow/tfjs-core";
 
 import { convLayer } from "../common";
-import { prelu } from "./prelu";
+import { prelu } from "../utils";
 import { SharedParams } from "./types";
 
-export function sharedLayer(x: tf.Tensor4D, params: SharedParams, isPnet: boolean = false) {
+export function sharedLayer(x: tf.Tensor4D, params: SharedParams, isPnet = false) {
   return tf.tidy(() => {
     let out = convLayer(x, params.conv1, "valid");
     out = prelu<tf.Tensor4D>(out, params.prelu1_alpha);

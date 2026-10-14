@@ -1,6 +1,8 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { NetInput, TNetInput, toNetInput } from "../dom";
+import { NetInput } from "../dom/NetInput";
+import { toNetInput } from "../dom/toNetInput";
+import { TNetInput } from "../dom/types";
 import { FaceFeatureExtractor } from "../faceFeatureExtractor/FaceFeatureExtractor";
 import { FaceFeatureExtractorParams } from "../faceFeatureExtractor/types";
 import { FaceProcessor } from "../faceProcessor/FaceProcessor";

@@ -1,13 +1,13 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { fullyConnectedLayer } from "../common/fullyConnectedLayer";
-import { NetInput } from "../dom";
+import { fullyConnectedLayer } from "../common";
+import { NetInput } from "../dom/NetInput";
 import { FaceFeatureExtractorParams, IFaceFeatureExtractor, TinyFaceFeatureExtractorParams } from "../faceFeatureExtractor/types";
 import { NeuralNetwork } from "../NeuralNetwork";
 import { extractParams } from "./extractParams";
 import { extractParamsFromWeigthMap } from "./extractParamsFromWeigthMap";
 import { NetParams } from "./types";
-import { seperateWeightMaps } from "./util";
+import { seperateWeightMaps } from "../utils";
 
 export abstract class FaceProcessor<TExtractorParams extends FaceFeatureExtractorParams | TinyFaceFeatureExtractorParams> extends NeuralNetwork<NetParams> {
   protected _faceFeatureExtractor: IFaceFeatureExtractor<TExtractorParams>;
@@ -38,7 +38,7 @@ export abstract class FaceProcessor<TExtractorParams extends FaceFeatureExtracto
     });
   }
 
-  public dispose(throwOnRedispose: boolean = true) {
+  public dispose(throwOnRedispose = true) {
     this.faceFeatureExtractor.dispose(throwOnRedispose);
     super.dispose(throwOnRedispose);
   }

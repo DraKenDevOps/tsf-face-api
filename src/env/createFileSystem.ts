@@ -1,6 +1,4 @@
-import { FileSystem } from "./types";
-
-export function createFileSystem(fs?: any): FileSystem {
+export function createFileSystem(fs?: any): IFileSystem {
   let requireFsError = "";
 
   if (!fs) {
@@ -31,6 +29,8 @@ export function createFileSystem(fs?: any): FileSystem {
       };
 
   return {
-    readFile
+    readFile,
+    name: "nodejs",
+    root: {} as FileSystemDirectoryEntry
   };
 }

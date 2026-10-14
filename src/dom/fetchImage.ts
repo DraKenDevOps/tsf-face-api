@@ -1,4 +1,4 @@
-import { bufferToImage } from "./bufferToImage";
+import { blobToImage } from "./blobToImage";
 import { fetchOrThrow } from "./fetchOrThrow";
 
 export async function fetchImage(uri: string): Promise<HTMLImageElement> {
@@ -8,5 +8,5 @@ export async function fetchImage(uri: string): Promise<HTMLImageElement> {
   if (!blob.type.startsWith("image/")) {
     throw new Error(`fetchImage - expected blob type to be of type image/*, instead have: ${blob.type}, for url: ${res.url}`);
   }
-  return bufferToImage(blob);
+  return blobToImage(blob);
 }

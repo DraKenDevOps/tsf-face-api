@@ -1,15 +1,3 @@
-export enum TinyYolov2SizeType {
-  XS = 224,
-  SM = 320,
-  MD = 416,
-  LG = 608
-}
-
-export interface ITinyYolov2Options {
-  inputSize?: number;
-  scoreThreshold?: number;
-}
-
 export class TinyYolov2Options {
   protected _name: string = "TinyYolov2Options";
 

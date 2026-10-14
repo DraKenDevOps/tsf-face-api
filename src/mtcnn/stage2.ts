@@ -1,7 +1,7 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { Box } from "../classes";
-import { nonMaxSuppression } from "../ops";
+import { Box } from "../classes/Box";
+import { nonMaxSuppression } from "../ops/nonMaxSuppression";
 import { extractImagePatches } from "./extractImagePatches";
 import { MtcnnBox } from "./MtcnnBox";
 import { RNet } from "./RNet";

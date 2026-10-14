@@ -1,8 +1,3 @@
-export interface ISsdMobilenetv1Options {
-  minConfidence?: number;
-  maxResults?: number;
-}
-
 export class SsdMobilenetv1Options {
   protected _name: string = "SsdMobilenetv1Options";
 

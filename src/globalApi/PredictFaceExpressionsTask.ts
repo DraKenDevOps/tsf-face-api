@@ -1,6 +1,6 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { TNetInput } from "../dom";
+import { TNetInput } from "../dom/types";
 import { FaceExpressions } from "../faceExpressionNet/FaceExpressions";
 import { WithFaceDetection } from "../factories/WithFaceDetection";
 import { extendWithFaceExpressions, WithFaceExpressions } from "../factories/WithFaceExpressions";

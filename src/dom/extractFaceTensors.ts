@@ -1,6 +1,6 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { Rect } from "../classes";
+import { Rect } from "../classes/Rect";
 import { FaceDetection } from "../classes/FaceDetection";
 import { isTensor3D, isTensor4D } from "../utils";
 

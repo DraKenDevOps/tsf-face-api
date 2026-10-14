@@ -1,10 +1,5 @@
 import { round } from "../utils";
 
-export interface IFaceMatch {
-  label: string;
-  distance: number;
-}
-
 export class FaceMatch implements IFaceMatch {
   private _label: string;
   private _distance: number;
@@ -21,7 +16,7 @@ export class FaceMatch implements IFaceMatch {
     return this._distance;
   }
 
-  public toString(withDistance: boolean = true): string {
+  public toString(withDistance = true): string {
     return `${this.label}${withDistance ? ` (${round(this.distance)})` : ""}`;
   }
 }

@@ -1,6 +1,5 @@
-import { extractConvParamsFactory, extractSeparableConvParamsFactory, extractWeightsFactory } from "../common";
-import { ExtractWeightsFunction, ParamMapping } from "../common/types";
-import { range } from "../utils";
+import { extractConvParamsFactory, extractSeparableConvParamsFactory } from "../common";
+import { extractWeightsFactory, range } from "../utils";
 import { MainBlockParams, ReductionBlockParams, TinyXceptionParams } from "./types";
 
 function extractorsFactory(extractWeights: ExtractWeightsFunction, paramMappings: ParamMapping[]) {

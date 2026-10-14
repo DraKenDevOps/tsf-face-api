@@ -1,9 +1,8 @@
-import { Box } from "./Box";
-import { IDimensions } from "./Dimensions";
 import { ObjectDetection } from "./ObjectDetection";
+import { Box } from "./Box";
 import { Rect } from "./Rect";
 
-export interface IFaceDetecion {
+interface IFaceDetecion {
   score: number;
   box: Box;
 }

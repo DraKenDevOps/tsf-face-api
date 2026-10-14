@@ -11,11 +11,11 @@ export default defineConfig({
         test: {
           name: 'node',
           environment: 'node',
-          setupFiles: ['./test/vitest.setup.ts', './test/env.node.ts'],
-          include: ['test/tests/**/*.test.ts'],
+          setupFiles: ['./tests/vitest.setup.ts', './tests/env.node.ts'],
+          include: ['tests/**/*.test.ts'],
           exclude: [
-            'test/tests/**/*.browser.test.ts',
-            'test/tests-legacy/**/*.ts'
+            'tests/**/*.browser.test.ts',
+            'tests-legacy/**/*.ts'
           ]
         }
       },
@@ -23,11 +23,11 @@ export default defineConfig({
         extends: true,
         test: {
           name: 'browser',
-          setupFiles: ['./test/vitest.setup.ts'],
-          include: ['test/tests/**/*.test.ts'],
+          setupFiles: ['./tests/vitest.setup.ts'],
+          include: ['tests/**/*.test.ts'],
           exclude: [
-            'test/tests/**/*.node.test.ts',
-            'test/tests-legacy/**/*.ts'
+            'tests/**/*.node.test.ts',
+            'tests-legacy/**/*.ts'
           ],
           browser: {
             enabled: true,

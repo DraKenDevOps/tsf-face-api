@@ -1,5 +1,5 @@
-import { IPoint, Point } from "../classes";
-import { FaceExpressions } from "../faceExpressionNet";
+import { Point } from "../classes/Point";
+import { FaceExpressions } from "../faceExpressionNet/FaceExpressions";
 import { isWithFaceDetection } from "../factories/WithFaceDetection";
 import { isWithFaceExpressions, WithFaceExpressions } from "../factories/WithFaceExpressions";
 import { round } from "../utils";

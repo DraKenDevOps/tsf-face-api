@@ -1,7 +1,6 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { disposeUnusedWeightTensors, extractWeightEntryFactory, loadSeparableConvParamsFactory, ParamMapping } from "../common";
-import { loadConvParamsFactory } from "../common/loadConvParamsFactory";
+import { disposeUnusedWeightTensors, loadSeparableConvParamsFactory, extractWeightEntryFactory, loadConvParamsFactory } from "../common";
 import { range } from "../utils";
 import { MainBlockParams, ReductionBlockParams, TinyXceptionParams } from "./types";
 

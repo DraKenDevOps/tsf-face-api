@@ -1,6 +1,6 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { disposeUnusedWeightTensors, ParamMapping } from "../common";
+import { disposeUnusedWeightTensors } from "../common";
 import { loadParamsFactory } from "./loadParamsFactory";
 import { TinyFaceFeatureExtractorParams } from "./types";
 

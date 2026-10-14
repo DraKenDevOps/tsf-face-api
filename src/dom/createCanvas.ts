@@ -1,4 +1,3 @@
-import { IDimensions } from "../classes/Dimensions";
 import { env } from "../env";
 import { getContext2dOrThrow } from "./getContext2dOrThrow";
 import { getMediaDimensions } from "./getMediaDimensions";

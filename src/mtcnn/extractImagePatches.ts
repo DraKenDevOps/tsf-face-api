@@ -1,9 +1,10 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { Box, IDimensions } from "../classes";
-import { createCanvas, createCanvasFromMedia, getContext2dOrThrow } from "../dom";
+import { Box } from "../classes/Box";
+import { createCanvas, createCanvasFromMedia } from "../dom/createCanvas";
+import { getContext2dOrThrow } from "../dom/getContext2dOrThrow";
 import { env } from "../env";
-import { normalize } from "./normalize";
+import { normalize } from "../utils";
 
 export async function extractImagePatches(img: HTMLCanvasElement, boxes: Box[], { width, height }: IDimensions): Promise<tf.Tensor4D[]> {
   const imgCtx = getContext2dOrThrow(img);

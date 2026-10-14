@@ -1,18 +1,16 @@
-import { minBbox } from "../ops";
+import { minBbox } from "../ops/minBbox";
 import { getCenterPoint } from "../utils";
-import { IBoundingBox } from "./BoundingBox";
 import { Box } from "./Box";
-import { Dimensions, IDimensions } from "./Dimensions";
+import { Dimensions } from "./Dimensions";
 import { FaceDetection } from "./FaceDetection";
 import { Point } from "./Point";
-import { IRect, Rect } from "./Rect";
+import { Rect } from "./Rect";
 
 // face alignment constants
 const relX = 0.5;
 const relY = 0.43;
 const relScale = 0.45;
-
-export interface IFaceLandmarks {
+interface IFaceLandmarks {
   positions: Point[];
   shift: Point;
 }

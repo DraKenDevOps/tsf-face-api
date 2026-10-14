@@ -1,9 +1,7 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { extractConvParamsFactory } from "../common";
-import { extractSeparableConvParamsFactory } from "../common/extractSeparableConvParamsFactory";
-import { extractWeightsFactory } from "../common/extractWeightsFactory";
-import { ExtractWeightsFunction, ParamMapping } from "../common/types";
+import { extractConvParamsFactory, extractSeparableConvParamsFactory } from "../common";
+import { extractWeightsFactory } from "../utils";
 import { TinyYolov2Config } from "./config";
 import { BatchNorm, ConvWithBatchNorm, TinyYolov2NetParams } from "./types";
 

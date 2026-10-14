@@ -5,20 +5,18 @@ import { Dimensions } from "../classes/Dimensions";
 import { ObjectDetection } from "../classes/ObjectDetection";
 import { convLayer } from "../common";
 import { ConvParams, SeparableConvParams } from "../common/types";
-import { toNetInput } from "../dom";
 import { NetInput } from "../dom/NetInput";
+import { toNetInput } from "../dom/toNetInput";
 import { TNetInput } from "../dom/types";
 import { NeuralNetwork } from "../NeuralNetwork";
-import { sigmoid } from "../ops";
 import { nonMaxSuppression } from "../ops/nonMaxSuppression";
-import { normalize } from "../ops/normalize";
+import { opsNormalize, sigmoid, leaky } from "../utils";
 import { TinyYolov2Config, validateConfig } from "./config";
 import { convWithBatchNorm } from "./convWithBatchNorm";
 import { depthwiseSeparableConv } from "./depthwiseSeparableConv";
 import { extractParams } from "./extractParams";
 import { extractParamsFromWeigthMap } from "./extractParamsFromWeigthMap";
-import { leaky } from "./leaky";
-import { ITinyYolov2Options, TinyYolov2Options } from "./TinyYolov2Options";
+import { TinyYolov2Options } from "./TinyYolov2Options";
 import { DefaultTinyYolov2NetParams, MobilenetParams, TinyYolov2NetParams } from "./types";
 
 export class TinyYolov2Base extends NeuralNetwork<TinyYolov2NetParams> {
@@ -93,7 +91,7 @@ export class TinyYolov2Base extends NeuralNetwork<TinyYolov2NetParams> {
 
     return tf.tidy(() => {
       let batchTensor = tf.cast(input.toBatchTensor(inputSize, false), "float32") as tf.Tensor4D;
-      batchTensor = this.config.meanRgb ? normalize(batchTensor, this.config.meanRgb) : batchTensor;
+      batchTensor = this.config.meanRgb ? opsNormalize(batchTensor, this.config.meanRgb) : batchTensor;
       batchTensor = tf.div(batchTensor, tf.scalar(256)) as tf.Tensor4D;
 
       return this.config.withSeparableConvs
@@ -110,7 +108,7 @@ export class TinyYolov2Base extends NeuralNetwork<TinyYolov2NetParams> {
     const { inputSize, scoreThreshold } = new TinyYolov2Options(forwardParams);
 
     const netInput = await toNetInput(input);
-    const out = await this.forwardInput(netInput, inputSize);
+    const out = this.forwardInput(netInput, inputSize);
     const out0 = tf.tidy(() => tf.expandDims(tf.unstack(out)[0])) as tf.Tensor4D;
 
     const inputDimensions = {

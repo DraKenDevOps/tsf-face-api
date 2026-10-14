@@ -1,6 +1,7 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { ExtractWeightsFunction, ParamMapping, ConvParams, extractWeightsFactory } from "../common";
+import { ConvParams } from "../common/types";
+import { extractWeightsFactory } from "../utils";
 import { MobileNetV1, NetParams, PointwiseConvParams, PredictionLayerParams } from "./types";
 
 function extractorsFactory(extractWeights: ExtractWeightsFunction, paramMappings: ParamMapping[]) {

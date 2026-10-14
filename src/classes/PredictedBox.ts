@@ -1,7 +1,5 @@
 import { isValidProbablitiy } from "../utils";
-import { IBoundingBox } from "./BoundingBox";
 import { LabeledBox } from "./LabeledBox";
-import { IRect } from "./Rect";
 
 export class PredictedBox extends LabeledBox {
   public static assertIsValidPredictedBox(box: any, callee: string) {

@@ -1,15 +1,21 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { FaceDetection, Point } from "../classes";
-import { ParamMapping } from "../common/types";
+import { FaceDetection } from "../classes/FaceDetection";
+import { Point } from "../classes/Point";
 import { TNetInput } from "../dom/types";
-import { BOX_ANCHORS, BOX_ANCHORS_SEPARABLE, DEFAULT_MODEL_NAME, DEFAULT_MODEL_NAME_SEPARABLE_CONV, IOU_THRESHOLD, MEAN_RGB_SEPARABLE } from "./const";
+import {
+  TINY_YOLO_BOX_ANCHORS,
+  BOX_ANCHORS_SEPARABLE,
+  DEFAULT_MODEL_NAME,
+  DEFAULT_MODEL_NAME_SEPARABLE_CONV,
+  IOU_THRESHOLD,
+  MEAN_RGB_SEPARABLE
+} from "../utils/config";
 import { TinyYolov2Base } from "./TinyYolov2Base";
-import { ITinyYolov2Options } from "./TinyYolov2Options";
 import { TinyYolov2NetParams } from "./types";
 
 export class TinyYolov2 extends TinyYolov2Base {
-  constructor(withSeparableConvs: boolean = true) {
+  constructor(withSeparableConvs = true) {
     const config = Object.assign(
       {},
       {
@@ -23,7 +29,7 @@ export class TinyYolov2 extends TinyYolov2Base {
             meanRgb: MEAN_RGB_SEPARABLE
           }
         : {
-            anchors: BOX_ANCHORS,
+            anchors: TINY_YOLO_BOX_ANCHORS,
             withClassScores: true
           }
     );
@@ -51,4 +57,10 @@ export class TinyYolov2 extends TinyYolov2Base {
   protected extractParamsFromWeigthMap(weightMap: tf.NamedTensorMap): { params: TinyYolov2NetParams; paramMappings: ParamMapping[] } {
     return super.extractParamsFromWeigthMap(weightMap);
   }
+}
+
+export function createTinyYolov2(weights: Float32Array, withSeparableConvs = true) {
+  const net = new TinyYolov2(withSeparableConvs);
+  net.extractWeights(weights);
+  return net;
 }

@@ -1,11 +1,3 @@
-export interface IMtcnnOptions {
-  minFaceSize?: number;
-  scaleFactor?: number;
-  maxNumScales?: number;
-  scoreThresholds?: number[];
-  scaleSteps?: number[];
-}
-
 export class MtcnnOptions {
   protected _name: string = "MtcnnOptions";
 

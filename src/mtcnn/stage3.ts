@@ -1,7 +1,9 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { BoundingBox, Box, Point } from "../classes";
-import { nonMaxSuppression } from "../ops";
+import { BoundingBox } from "../classes/BoundingBox";
+import { Box } from "../classes/Box";
+import { Point } from "../classes/Point";
+import { nonMaxSuppression } from "../ops/nonMaxSuppression";
 import { extractImagePatches } from "./extractImagePatches";
 import { MtcnnBox } from "./MtcnnBox";
 import { ONet } from "./ONet";

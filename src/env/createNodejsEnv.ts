@@ -1,5 +1,4 @@
 import { createFileSystem } from "./createFileSystem";
-import { Environment } from "./types";
 
 export function createNodejsEnv(): Environment {
   const g = globalThis as Record<string, any>;

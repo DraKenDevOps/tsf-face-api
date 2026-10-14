@@ -1,4 +1,4 @@
-import { FCParams } from "../common";
+import { FCParams } from "../common/types";
 
 export type NetParams = {
   fc: FCParams;

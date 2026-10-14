@@ -1,8 +1,7 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { AgeAndGenderPrediction } from "../ageGenderNet/types";
-import { TNetInput } from "../dom";
-import { extendWithAge, WithAge } from "../factories/WithAge";
+import { TNetInput } from "../dom/types";
+import { extendWithAge } from "../utils";
 import { WithFaceDetection } from "../factories/WithFaceDetection";
 import { WithFaceLandmarks } from "../factories/WithFaceLandmarks";
 import { extendWithGender, WithGender } from "../factories/WithGender";

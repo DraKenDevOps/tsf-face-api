@@ -1,10 +1,5 @@
 import { isValidNumber } from "../utils";
 
-export interface IDimensions {
-  width: number;
-  height: number;
-}
-
 export class Dimensions implements IDimensions {
   private _width: number;
   private _height: number;

@@ -1,9 +1,7 @@
+import { isBrowser, isNodejs } from "../utils";
 import { createBrowserEnv } from "./createBrowserEnv";
 import { createFileSystem } from "./createFileSystem";
 import { createNodejsEnv } from "./createNodejsEnv";
-import { isBrowser } from "./isBrowser";
-import { isNodejs } from "./isNodejs";
-import { Environment } from "./types";
 
 let environment: Environment | null;
 
@@ -59,9 +57,9 @@ function monkeyPatch(env: Partial<Environment>) {
 
   if (typeof globalThis !== "undefined") {
     const g = globalThis as Record<string, any>;
-    if (env.Canvas && !g["HTMLCanvasElement"]) g["HTMLCanvasElement"] = env.Canvas;
-    if (env.Image && !g["HTMLImageElement"]) g["HTMLImageElement"] = env.Image;
-    if (env.ImageData && !g["ImageData"]) g["ImageData"] = env.ImageData;
+    if (environment.Canvas && !g["HTMLCanvasElement"]) g["HTMLCanvasElement"] = environment.Canvas;
+    if (environment.Image && !g["HTMLImageElement"]) g["HTMLImageElement"] = environment.Image;
+    if (environment.ImageData && !g["ImageData"]) g["ImageData"] = environment.ImageData;
   }
 }
 
@@ -78,5 +76,3 @@ export const env = {
 };
 
 initialize();
-
-export * from "./types";

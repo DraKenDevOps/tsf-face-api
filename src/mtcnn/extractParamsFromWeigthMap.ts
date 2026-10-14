@@ -1,6 +1,7 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { ConvParams, disposeUnusedWeightTensors, extractWeightEntryFactory, FCParams, ParamMapping } from "../common";
+import { disposeUnusedWeightTensors, extractWeightEntryFactory } from "../common";
+import { ConvParams, FCParams } from "../common/types";
 import { NetParams, ONetParams, PNetParams, RNetParams, SharedParams } from "./types";
 
 function extractorsFactory(weightMap: any, paramMappings: ParamMapping[]) {

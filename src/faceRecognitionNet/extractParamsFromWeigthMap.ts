@@ -1,6 +1,6 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { disposeUnusedWeightTensors, extractWeightEntryFactory, ParamMapping } from "../common";
+import { disposeUnusedWeightTensors, extractWeightEntryFactory } from "../common";
 import { isTensor2D } from "../utils";
 import { ConvLayerParams, NetParams, ResidualLayerParams, ScaleLayerParams } from "./types";
 

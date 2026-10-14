@@ -1,13 +1,15 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { NetInput, TNetInput, toNetInput } from "../dom";
+import { NetInput } from "../dom/NetInput";
+import { toNetInput } from "../dom/toNetInput";
+import { TNetInput } from "../dom/types";
 import { NeuralNetwork } from "../NeuralNetwork";
-import { normalize } from "../ops";
 import { convDown } from "./convLayer";
 import { extractParams } from "./extractParams";
 import { extractParamsFromWeigthMap } from "./extractParamsFromWeigthMap";
 import { residual, residualDown } from "./residualLayer";
 import { NetParams } from "./types";
+import { opsNormalize } from "../utils";
 
 export class FaceRecognitionNet extends NeuralNetwork<NetParams> {
   constructor() {
@@ -25,7 +27,7 @@ export class FaceRecognitionNet extends NeuralNetwork<NetParams> {
       const batchTensor = tf.cast(input.toBatchTensor(150, true), "float32") as tf.Tensor4D;
 
       const meanRgb = [122.782, 117.001, 104.298];
-      const normalized = tf.div(normalize(batchTensor, meanRgb), tf.scalar(256)) as tf.Tensor4D;
+      const normalized = tf.div(opsNormalize(batchTensor, meanRgb), tf.scalar(256)) as tf.Tensor4D;
 
       let out = convDown(normalized, params.conv32_down);
       out = tf.maxPool(out, 3, 2, "valid");
@@ -82,4 +84,10 @@ export class FaceRecognitionNet extends NeuralNetwork<NetParams> {
   protected extractParams(weights: Float32Array) {
     return extractParams(weights);
   }
+}
+
+export function createFaceRecognitionNet(weights: Float32Array) {
+  const net = new FaceRecognitionNet();
+  net.extractWeights(weights);
+  return net;
 }

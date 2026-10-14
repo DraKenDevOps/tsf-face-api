@@ -15,3 +15,5 @@ export class FaceLandmark68Net extends FaceLandmark68NetBase<FaceFeatureExtracto
     return 256;
   }
 }
+
+export class FaceLandmarkNet extends FaceLandmark68Net {}

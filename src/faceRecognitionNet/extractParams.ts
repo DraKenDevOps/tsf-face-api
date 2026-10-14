@@ -1,7 +1,7 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { ConvParams, extractWeightsFactory, ExtractWeightsFunction, ParamMapping } from "../common";
-import { isFloat } from "../utils";
+import { ConvParams } from "../common/types";
+import { extractWeightsFactory, isFloat } from "../utils";
 import { ConvLayerParams, NetParams, ResidualLayerParams, ScaleLayerParams } from "./types";
 
 function extractorsFactory(extractWeights: ExtractWeightsFunction, paramMappings: ParamMapping[]) {
@@ -49,7 +49,7 @@ function extractorsFactory(extractWeights: ExtractWeightsFunction, paramMappings
     numFilters: number,
     filterSize: number,
     mappedPrefix: string,
-    isDown: boolean = false
+    isDown = false
   ): ResidualLayerParams {
     const conv1 = extractConvLayerParams((isDown ? 0.5 : 1) * numFilterValues, numFilters, filterSize, `${mappedPrefix}/conv1`);
     const conv2 = extractConvLayerParams(numFilterValues, numFilters, filterSize, `${mappedPrefix}/conv2`);

@@ -1,10 +1,10 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { ConvParams, SeparableConvParams } from "../common";
-import { depthwiseSeparableConv } from "../common/depthwiseSeparableConv";
+import { ConvParams, SeparableConvParams } from "../common/types";
+import { depthwiseSeparableConv } from "../common";
 import { DenseBlock3Params, DenseBlock4Params } from "./types";
 
-export function denseBlock3(x: tf.Tensor4D, denseBlockParams: DenseBlock3Params, isFirstLayer: boolean = false): tf.Tensor4D {
+export function denseBlock3(x: tf.Tensor4D, denseBlockParams: DenseBlock3Params, isFirstLayer = false): tf.Tensor4D {
   return tf.tidy(() => {
     const out1 = tf.relu(
       isFirstLayer
@@ -20,7 +20,7 @@ export function denseBlock3(x: tf.Tensor4D, denseBlockParams: DenseBlock3Params,
   });
 }
 
-export function denseBlock4(x: tf.Tensor4D, denseBlockParams: DenseBlock4Params, isFirstLayer: boolean = false, isScaleDown: boolean = true): tf.Tensor4D {
+export function denseBlock4(x: tf.Tensor4D, denseBlockParams: DenseBlock4Params, isFirstLayer = false, isScaleDown = true): tf.Tensor4D {
   return tf.tidy(() => {
     const out1 = tf.relu(
       isFirstLayer

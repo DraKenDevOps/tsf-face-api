@@ -177,7 +177,7 @@ async function loadJsonNode<T>(uri: string): Promise<T> {
 export async function initNetNode<TNet extends NeuralNetwork<any>>(
   net: TNet,
   uncompressedFilename?: string | boolean,
-  isUnusedModel: boolean = false
+  isUnusedModel = false
 ) {
   if (uncompressedFilename) {
     const filePath = path.resolve(
@@ -223,7 +223,7 @@ async function loadJsonBrowser<T>(uri: string): Promise<T> {
 async function initNetBrowser<TNet extends NeuralNetwork<any>>(
   net: TNet,
   uncompressedFilename?: string | boolean,
-  isUnusedModel: boolean = false
+  isUnusedModel = false
 ) {
   const url = uncompressedFilename
     ? await fetchNetWeights(`/weights_uncompressed/${uncompressedFilename}`)

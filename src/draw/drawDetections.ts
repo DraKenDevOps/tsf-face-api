@@ -1,4 +1,4 @@
-import { Box, IBoundingBox, IRect } from "../classes";
+import { Box } from "../classes/Box";
 import { FaceDetection } from "../classes/FaceDetection";
 import { isWithFaceDetection, WithFaceDetection } from "../factories/WithFaceDetection";
 import { round } from "../utils";

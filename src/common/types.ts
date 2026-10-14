@@ -1,12 +1,5 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-export type ExtractWeightsFunction = (numWeights: number) => Float32Array;
-
-export type ParamMapping = {
-  originalPath?: string;
-  paramPath: string;
-};
-
 export type ConvParams = {
   filters: tf.Tensor4D;
   bias: tf.Tensor1D;

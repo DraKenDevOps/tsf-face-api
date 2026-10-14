@@ -1,10 +1,7 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { ConvParams } from "../common";
-import { disposeUnusedWeightTensors } from "../common/disposeUnusedWeightTensors";
-import { loadSeparableConvParamsFactory } from "../common/extractSeparableConvParamsFactory";
-import { extractWeightEntryFactory } from "../common/extractWeightEntryFactory";
-import { ParamMapping } from "../common/types";
+import { ConvParams } from "../common/types";
+import { disposeUnusedWeightTensors, extractWeightEntryFactory, loadSeparableConvParamsFactory } from "../common";
 import { TinyYolov2Config } from "./config";
 import { BatchNorm, ConvWithBatchNorm, TinyYolov2NetParams } from "./types";
 

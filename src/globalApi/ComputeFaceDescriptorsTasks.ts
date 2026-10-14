@@ -1,5 +1,5 @@
-import { TNetInput } from "../dom";
-import { extendWithFaceDescriptor, WithFaceDescriptor } from "../factories/WithFaceDescriptor";
+import { TNetInput } from "../dom/types";
+import { extendWithFaceDescriptor } from "../utils";
 import { WithFaceDetection } from "../factories/WithFaceDetection";
 import { WithFaceLandmarks } from "../factories/WithFaceLandmarks";
 import { ComposableTask } from "./ComposableTask";

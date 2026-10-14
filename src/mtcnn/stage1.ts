@@ -1,11 +1,12 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { BoundingBox, Point } from "../classes";
-import { nonMaxSuppression } from "../ops";
-import { CELL_SIZE, CELL_STRIDE } from "./config";
-import { getSizesForScale } from "./getSizesForScale";
+import { BoundingBox } from "../classes/BoundingBox";
+import { Point } from "../classes/Point";
+import { nonMaxSuppression } from "../ops/nonMaxSuppression";
+import { getSizesForScale } from "../utils";
+import { CELL_SIZE, CELL_STRIDE } from "../utils/config";
 import { MtcnnBox } from "./MtcnnBox";
-import { normalize } from "./normalize";
+import { normalize } from "../utils";
 import { PNet } from "./PNet";
 import { PNetParams } from "./types";
 

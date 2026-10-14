@@ -1,13 +1,6 @@
-import { Box, IBoundingBox, IRect } from "../classes";
+import { Box } from "../classes/Box";
 import { getContext2dOrThrow } from "../dom/getContext2dOrThrow";
-import { AnchorPosition, DrawTextField, DrawTextFieldOptions, IDrawTextFieldOptions } from "./DrawTextField";
-
-export interface IDrawBoxOptions {
-  boxColor?: string;
-  lineWidth?: number;
-  drawLabelOptions?: IDrawTextFieldOptions;
-  label?: string;
-}
+import { DrawTextField, DrawTextFieldOptions } from "./DrawTextField";
 
 export class DrawBoxOptions {
   public boxColor: string;
@@ -17,7 +10,7 @@ export class DrawBoxOptions {
 
   constructor(options: IDrawBoxOptions = {}) {
     const { boxColor, lineWidth, label, drawLabelOptions } = options;
-    this.boxColor = boxColor || "rgba(0, 0, 255, 1)";
+    this.boxColor = boxColor || "rgba(255, 0, 0, 1)";
     this.lineWidth = lineWidth || 2;
     this.label = label;
 

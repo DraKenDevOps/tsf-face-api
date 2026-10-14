@@ -1,17 +1,21 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { Point, Rect } from "../classes";
 import { FaceDetection } from "../classes/FaceDetection";
 import { FaceLandmarks5 } from "../classes/FaceLandmarks5";
-import { NetInput, TNetInput, toNetInput } from "../dom";
-import { extendWithFaceDetection, extendWithFaceLandmarks } from "../factories";
+import { Point } from "../classes/Point";
+import { Rect } from "../classes/Rect";
+import { NetInput } from "../dom/NetInput";
+import { toNetInput } from "../dom/toNetInput";
+import { TNetInput } from "../dom/types";
+import { extendWithFaceDetection } from "../factories/WithFaceDetection";
+import { extendWithFaceLandmarks } from "../factories/WithFaceLandmarks";
 import { NeuralNetwork } from "../NeuralNetwork";
-import { bgrToRgbTensor } from "./bgrToRgbTensor";
-import { CELL_SIZE } from "./config";
+import { getSizesForScale } from "../utils";
+import { bgrToRgbTensor } from "../utils";
+import { CELL_SIZE } from "../utils/config";
 import { extractParams } from "./extractParams";
 import { extractParamsFromWeigthMap } from "./extractParamsFromWeigthMap";
-import { getSizesForScale } from "./getSizesForScale";
-import { IMtcnnOptions, MtcnnOptions } from "./MtcnnOptions";
+import { MtcnnOptions } from "./MtcnnOptions";
 import { pyramidDown } from "./pyramidDown";
 import { stage1 } from "./stage1";
 import { stage2 } from "./stage2";
@@ -136,4 +140,10 @@ export class Mtcnn extends NeuralNetwork<NetParams> {
   protected extractParams(weights: Float32Array) {
     return extractParams(weights);
   }
+}
+
+export function createMtcnn(weights: Float32Array) {
+  const net = new Mtcnn();
+  net.extractWeights(weights);
+  return net;
 }

@@ -1,10 +1,10 @@
 import { FaceDetection } from "../classes/FaceDetection";
-import { TNetInput } from "../dom";
+import { TNetInput } from "../dom/types";
 import { extendWithFaceDetection, WithFaceDetection } from "../factories/WithFaceDetection";
 import { MtcnnOptions } from "../mtcnn/MtcnnOptions";
 import { SsdMobilenetv1Options } from "../ssdMobilenetv1/SsdMobilenetv1Options";
 import { TinyFaceDetectorOptions } from "../tinyFaceDetector/TinyFaceDetectorOptions";
-import { TinyYolov2Options } from "../tinyYolov2";
+import { TinyYolov2Options } from "../tinyYolov2/TinyYolov2Options";
 import { ComposableTask } from "./ComposableTask";
 import { DetectAllFaceLandmarksTask, DetectSingleFaceLandmarksTask } from "./DetectFaceLandmarksTasks";
 import { nets } from "./nets";
@@ -52,7 +52,7 @@ export class DetectAllFacesTask extends DetectFacesTaskBase<FaceDetection[]> {
     });
   }
 
-  withFaceLandmarks(useTinyLandmarkNet: boolean = false) {
+  withFaceLandmarks(useTinyLandmarkNet = false) {
     return new DetectAllFaceLandmarksTask(this.runAndExtendWithFaceDetections(), this.input, useTinyLandmarkNet);
   }
 
@@ -84,7 +84,7 @@ export class DetectSingleFaceTask extends DetectFacesTaskBase<FaceDetection | un
     });
   }
 
-  withFaceLandmarks(useTinyLandmarkNet: boolean = false) {
+  withFaceLandmarks(useTinyLandmarkNet = false) {
     return new DetectSingleFaceLandmarksTask(this.runAndExtendWithFaceDetection(), this.input, useTinyLandmarkNet);
   }
 

@@ -1,7 +1,7 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { fullyConnectedLayer } from "../common/fullyConnectedLayer";
-import { prelu } from "./prelu";
+import { fullyConnectedLayer } from "../common";
+import { prelu } from "../utils";
 import { sharedLayer } from "./sharedLayers";
 import { RNetParams } from "./types";
 
