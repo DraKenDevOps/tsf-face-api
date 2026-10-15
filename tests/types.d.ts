@@ -44,6 +44,7 @@ interface IDrawTextFieldOptions {
   fontStyle?: string;
   padding?: number;
 }
+
 interface IMtcnnOptions {
   minFaceSize?: number;
   scaleFactor?: number;

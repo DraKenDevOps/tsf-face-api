@@ -50,7 +50,6 @@ export class SsdMobilenetv1 extends NeuralNetwork<NetParams> {
 
     const { boxes: _boxes, scores: _scores } = this.forwardInput(netInput);
 
-    // TODO batches
     const boxes = _boxes[0];
     const scores = _scores[0];
     for (let i = 1; i < _boxes.length; i++) {
@@ -58,7 +57,6 @@ export class SsdMobilenetv1 extends NeuralNetwork<NetParams> {
       _scores[i].dispose();
     }
 
-    // TODO find a better way to filter by minConfidence
     const scoresData = Array.from(await scores.data());
 
     const iouThreshold = 0.5;
@@ -69,7 +67,7 @@ export class SsdMobilenetv1 extends NeuralNetwork<NetParams> {
     const padX = inputSize / reshapedDims.width;
     const padY = inputSize / reshapedDims.height;
 
-    const boxesData = boxes.arraySync() as number[][];
+    const boxesData = indices.length ? (boxes.arraySync() as number[][]) : [];
     const results = indices.map((idx) => {
       const [top, bottom] = [Math.max(0, boxesData[idx][0]), Math.min(1.0, boxesData[idx][2])].map((val) => val * padY);
       const [left, right] = [Math.max(0, boxesData[idx][1]), Math.min(1.0, boxesData[idx][3])].map((val) => val * padX);

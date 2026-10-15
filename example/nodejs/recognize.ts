@@ -24,7 +24,7 @@ function getFaceDetectorOptions(net: faceapi.NeuralNetwork<any>) {
     : new faceapi.TinyFaceDetectorOptions({ inputSize, scoreThreshold });
 }
 
-const imagePath = path.resolve("C:\\Users\\Anakin\\Pictures\\leon_photo.png");
+const imagePath = path.resolve(process.cwd() + "/tests/images/face1.png");
 const modelPath = path.resolve(process.cwd() + "/weights");
 (async () => {
   await faceDetectionNet.loadFromDisk(modelPath);
@@ -34,6 +34,8 @@ const modelPath = path.resolve(process.cwd() + "/weights");
   const referenceImage = await canvas.loadImage(imagePath);
   const faceDetectionOptions = getFaceDetectorOptions(faceDetectionNet);
 
+  console.time("recognize");
   const resultsRef = await faceapi.detectSingleFace(referenceImage, faceDetectionOptions).withFaceLandmarks().withFaceDescriptor();
   console.log("resultsRef", Array.from(resultsRef?.descriptor || []));
+  console.timeEnd("recognize");
 })();

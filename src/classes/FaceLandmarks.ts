@@ -92,11 +92,10 @@ export class FaceLandmarks implements IFaceLandmarks {
     const size = Math.floor(eyeToMouthDist / relScale);
 
     const refPoint = getCenterPoint(centers);
-    // TODO: pad in case rectangle is out of image bounds
     const x = Math.floor(Math.max(0, refPoint.x - relX * size));
     const y = Math.floor(Math.max(0, refPoint.y - relY * size));
 
-    return new Rect(x, y, Math.min(size, this.imageWidth + x), Math.min(size, this.imageHeight + y));
+    return new Rect(x, y, Math.min(size, this.imageWidth - x), Math.min(size, this.imageHeight - y));
   }
 
   private alignMinBbox(padding: number): Box {

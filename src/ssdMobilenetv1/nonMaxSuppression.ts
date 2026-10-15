@@ -9,6 +9,11 @@ export function nonMaxSuppression(boxes: tf.Tensor2D, scores: number[], maxOutpu
     .filter((c) => c.score > scoreThreshold)
     .sort((c1, c2) => c2.score - c1.score);
 
+  if (!candidates.length) {
+    return [];
+  }
+
+  const boxesData = boxes.arraySync() as number[][];
   const suppressFunc = (x: number) => (x <= iouThreshold ? 1 : 0);
 
   const selected: number[] = [];
@@ -20,7 +25,7 @@ export function nonMaxSuppression(boxes: tf.Tensor2D, scores: number[], maxOutpu
     const originalScore = c.score;
 
     for (let j = selected.length - 1; j >= 0; --j) {
-      const iou = IOU(boxes, c.boxIndex, selected[j]);
+      const iou = IOU(boxesData, c.boxIndex, selected[j]);
       if (iou === 0.0) {
         continue;
       }
@@ -38,8 +43,7 @@ export function nonMaxSuppression(boxes: tf.Tensor2D, scores: number[], maxOutpu
   return selected;
 }
 
-function IOU(boxes: tf.Tensor2D, i: number, j: number) {
-  const boxesData = boxes.arraySync() as number[][];
+function IOU(boxesData: number[][], i: number, j: number) {
   const yminI = Math.min(boxesData[i][0], boxesData[i][2]);
   const xminI = Math.min(boxesData[i][1], boxesData[i][3]);
   const ymaxI = Math.max(boxesData[i][0], boxesData[i][2]);

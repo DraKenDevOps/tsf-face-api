@@ -21,7 +21,6 @@ function rescaleAndNormalize(x: tf.Tensor4D, scale: number): tf.Tensor4D {
 }
 
 function extractBoundingBoxes(scoresTensor: tf.Tensor2D, regionsTensor: tf.Tensor3D, scale: number, scoreThreshold: number) {
-  // TODO: fix this!, maybe better to use tf.gather here
   const indices: Point[] = [];
   const scoresData = scoresTensor.arraySync();
   for (let y = 0; y < scoresTensor.shape[0]; y++) {
@@ -32,6 +31,11 @@ function extractBoundingBoxes(scoresTensor: tf.Tensor2D, regionsTensor: tf.Tenso
     }
   }
 
+  if (!indices.length) {
+    return [];
+  }
+
+  const regionsData = regionsTensor.arraySync();
   const boundingBoxes = indices.map((idx) => {
     const cell = new BoundingBox(
       Math.round((idx.y * CELL_STRIDE + 1) / scale),
@@ -41,9 +45,8 @@ function extractBoundingBoxes(scoresTensor: tf.Tensor2D, regionsTensor: tf.Tenso
     );
 
     const score = scoresData[idx.y][idx.x];
-
-    const regionsData = regionsTensor.arraySync();
-    const region = new MtcnnBox(regionsData[idx.y][idx.x][0], regionsData[idx.y][idx.x][1], regionsData[idx.y][idx.x][2], regionsData[idx.y][idx.x][3]);
+    const [left, top, right, bottom] = regionsData[idx.y][idx.x];
+    const region = new MtcnnBox(left, top, right, bottom);
 
     return {
       cell,

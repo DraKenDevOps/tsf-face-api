@@ -12,7 +12,7 @@ export const BOX_ANCHORS = [
   new Point(9.041765, 10.66308)
 ];
 
-export const MEAN_RGB: [number, number, number] = [117.001, 114.697, 97.404];
+export const MEAN_RGB = [117.001, 114.697, 97.404];
 
 export const TINY_YOLO_BOX_ANCHORS = [
   new Point(0.738768, 0.874946),
@@ -30,7 +30,26 @@ export const BOX_ANCHORS_SEPARABLE = [
   new Point(9.041765, 10.66308)
 ];
 
-export const MEAN_RGB_SEPARABLE: [number, number, number] = [117.001, 114.697, 97.404];
+export const MEAN_RGB_SEPARABLE = [117.001, 114.697, 97.404];
 
 export const DEFAULT_MODEL_NAME = "tiny_yolov2_model";
 export const DEFAULT_MODEL_NAME_SEPARABLE_CONV = "tiny_yolov2_separable_conv_model";
+
+export enum TinyYolov2SizeType {
+  XS = 224,
+  SM = 320,
+  MD = 416,
+  LG = 608
+}
+
+export enum Gender {
+  FEMALE = "female",
+  MALE = "male"
+}
+
+export enum AnchorPosition {
+  TOP_LEFT = "TOP_LEFT",
+  TOP_RIGHT = "TOP_RIGHT",
+  BOTTOM_LEFT = "BOTTOM_LEFT",
+  BOTTOM_RIGHT = "BOTTOM_RIGHT"
+}

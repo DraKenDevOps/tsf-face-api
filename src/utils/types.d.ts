@@ -52,6 +52,13 @@ interface IDrawTextFieldOptions {
   padding?: number;
 }
 
+enum AnchorPosition {
+  TOP_LEFT = "TOP_LEFT",
+  TOP_RIGHT = "TOP_RIGHT",
+  BOTTOM_LEFT = "BOTTOM_LEFT",
+  BOTTOM_RIGHT = "BOTTOM_RIGHT"
+}
+
 interface IMtcnnOptions {
   minFaceSize?: number;
   scaleFactor?: number;
@@ -65,13 +72,6 @@ interface ISsdMobilenetv1Options {
   maxResults?: number;
 }
 
-declare enum TinyYolov2SizeType {
-  XS = 224,
-  SM = 320,
-  MD = 416,
-  LG = 608
-}
-
 interface ITinyYolov2Options {
   inputSize?: number;
   scoreThreshold?: number;
@@ -82,11 +82,6 @@ type AgeAndGenderPrediction = {
   gender: Gender;
   genderProbability: number;
 };
-
-declare enum Gender {
-  FEMALE = "female",
-  MALE = "male"
-}
 
 type ParamMapping = {
   originalPath?: string;
@@ -117,10 +112,3 @@ type WithAge<TSource> = TSource & {
 type WithFaceDescriptor<TSource> = TSource & {
   descriptor: Float32Array;
 };
-
-declare enum AnchorPosition {
-  TOP_LEFT = "TOP_LEFT",
-  TOP_RIGHT = "TOP_RIGHT",
-  BOTTOM_LEFT = "BOTTOM_LEFT",
-  BOTTOM_RIGHT = "BOTTOM_RIGHT"
-}

@@ -1,5 +1,6 @@
 import { getContext2dOrThrow } from "../dom/getContext2dOrThrow";
 import { resolveInput } from "../dom/resolveInput";
+import { AnchorPosition } from "../utils/config";
 
 export class DrawTextFieldOptions implements IDrawTextFieldOptions {
   public anchorPosition: AnchorPosition;

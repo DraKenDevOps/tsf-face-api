@@ -11,12 +11,17 @@ export async function extractImagePatches(img: HTMLCanvasElement, boxes: Box[], 
 
   const bitmaps = await Promise.all(
     boxes.map(async (box) => {
-      // TODO: correct padding
-      const { y, ey, x, ex } = box.padAtBorders(img.height, img.width);
+      const { dx, dy, y, ey, x, ex, w, h } = box.padAtBorders(img.height, img.width);
 
       const fromX = x - 1;
       const fromY = y - 1;
       const imgData = imgCtx.getImageData(fromX, fromY, ex - fromX, ey - fromY);
+
+      if (ex - fromX < w || ey - fromY < h) {
+        const paddedCanvas = createCanvas({ width: w, height: h });
+        getContext2dOrThrow(paddedCanvas).putImageData(imgData, dx - 1, dy - 1);
+        return paddedCanvas;
+      }
 
       return env.isNodejs() ? createCanvasFromMedia(imgData) : createImageBitmap(imgData);
     })

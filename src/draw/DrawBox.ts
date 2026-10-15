@@ -1,5 +1,6 @@
 import { Box } from "../classes/Box";
 import { getContext2dOrThrow } from "../dom/getContext2dOrThrow";
+import { AnchorPosition } from "../utils/config";
 import { DrawTextField, DrawTextFieldOptions } from "./DrawTextField";
 
 export class DrawBoxOptions {

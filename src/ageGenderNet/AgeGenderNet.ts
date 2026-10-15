@@ -10,6 +10,7 @@ import { NeuralNetwork } from "../NeuralNetwork";
 import { NetInput } from "../dom/NetInput";
 import { toNetInput } from "../dom/toNetInput";
 import { TNetInput } from "../dom/types";
+import { Gender } from "../utils/config";
 
 export class AgeGenderNet extends NeuralNetwork<NetParams> {
   private _faceFeatureExtractor: TinyXception;
@@ -53,7 +54,7 @@ export class AgeGenderNet extends NeuralNetwork<NetParams> {
 
   public async predictAgeAndGender(input: TNetInput): Promise<AgeAndGenderPrediction | AgeAndGenderPrediction[]> {
     const netInput = await toNetInput(input);
-    const out = await this.forwardInput(netInput);
+    const out = this.forwardInput(netInput);
 
     const ages = tf.unstack(out.age);
     const genders = tf.unstack(out.gender);
