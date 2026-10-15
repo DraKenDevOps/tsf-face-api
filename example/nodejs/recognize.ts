@@ -24,18 +24,23 @@ function getFaceDetectorOptions(net: faceapi.NeuralNetwork<any>) {
     : new faceapi.TinyFaceDetectorOptions({ inputSize, scoreThreshold });
 }
 
-const imagePath = path.resolve(process.cwd() + "/tests/images/face1.png");
+const angry = path.resolve(process.cwd() + "/tests/images/angry.jpg");
+const faces = path.resolve(process.cwd() + "/tests/images/faces.jpg");
+
 const modelPath = path.resolve(process.cwd() + "/weights");
 (async () => {
   await faceDetectionNet.loadFromDisk(modelPath);
   await faceapi.nets.faceLandmark68Net.loadFromDisk(modelPath);
   await faceapi.nets.faceRecognitionNet.loadFromDisk(modelPath);
 
-  const referenceImage = await canvas.loadImage(imagePath);
+  const angryImg = await canvas.loadImage(angry);
+  const facesImg = await canvas.loadImage(faces);
   const faceDetectionOptions = getFaceDetectorOptions(faceDetectionNet);
 
   console.time("recognize");
-  const resultsRef = await faceapi.detectSingleFace(referenceImage, faceDetectionOptions).withFaceLandmarks().withFaceDescriptor();
-  console.log("resultsRef", Array.from(resultsRef?.descriptor || []));
+  const single = await faceapi.detectSingleFace(angryImg, faceDetectionOptions).withFaceLandmarks().withFaceDescriptor();
+  // const all = await faceapi.detectAllFaces(facesImg, faceDetectionOptions).withFaceLandmarks().withFaceDescriptors();
+  console.log("single", Array.from(single?.descriptor || []));
+  // console.log("all", all.map((f) => Array.from(f.descriptor)));
   console.timeEnd("recognize");
 })();
