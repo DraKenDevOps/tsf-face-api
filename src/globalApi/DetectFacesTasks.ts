@@ -3,7 +3,7 @@ import { TNetInput } from "../dom/types";
 import { extendWithFaceDetection, WithFaceDetection } from "../factories/WithFaceDetection";
 import { MtcnnOptions } from "../mtcnn/MtcnnOptions";
 import { SsdMobilenetv1Options } from "../ssdMobilenetv1/SsdMobilenetv1Options";
-import { TinyFaceDetectorOptions } from "../tinyFaceDetector/TinyFaceDetectorOptions";
+import { TinyFaceDetectorOptions } from "../tinyFaceDetector";
 import { TinyYolov2Options } from "../tinyYolov2/TinyYolov2Options";
 import { ComposableTask } from "./ComposableTask";
 import { DetectAllFaceLandmarksTask, DetectSingleFaceLandmarksTask } from "./DetectFaceLandmarksTasks";

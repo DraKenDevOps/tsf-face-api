@@ -52,11 +52,16 @@ interface IDrawTextFieldOptions {
   padding?: number;
 }
 
-enum AnchorPosition {
+declare enum AnchorPosition {
   TOP_LEFT = "TOP_LEFT",
   TOP_RIGHT = "TOP_RIGHT",
   BOTTOM_LEFT = "BOTTOM_LEFT",
   BOTTOM_RIGHT = "BOTTOM_RIGHT"
+}
+
+declare enum Gender {
+  FEMALE = "female",
+  MALE = "male"
 }
 
 interface IMtcnnOptions {

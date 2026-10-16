@@ -5,7 +5,7 @@ export type TinyYolov2Config = {
   iouThreshold: number;
   anchors: Point[];
   classes: string[];
-  meanRgb?: [number, number, number];
+  meanRgb?: number[];
   withClassScores?: boolean;
   filterSizes?: number[];
   isFirstLayerConv2d?: boolean;
@@ -35,6 +35,6 @@ export function validateConfig(config: any) {
   }
 
   if (config.meanRgb && (!Array.isArray(config.meanRgb) || config.meanRgb.length !== 3 || !config.meanRgb.every(isNumber))) {
-    throw new Error(`config.meanRgb has to be an array of shape [number, number, number], have: ${JSON.stringify(config.meanRgb)}`);
+    throw new Error(`config.meanRgb has to be an array number[] of shape [number, number, number], have: ${JSON.stringify(config.meanRgb)}`);
   }
 }

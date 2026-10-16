@@ -1,6 +1,6 @@
-import { extendWithFaceDetection, FaceDetection, Rect } from '../../src';
+import { extendWithFaceDetection, FaceDetection, Rectangle } from '../../src';
 
-const detection = new FaceDetection(1.0, new Rect(0, 0, 0.5, 0.5), { width: 100, height: 100 })
+const detection = new FaceDetection(1.0, new Rectangle(0, 0, 0.5, 0.5), { width: 100, height: 100 })
 
 describe('extendWithFaceDetection', () => {
 

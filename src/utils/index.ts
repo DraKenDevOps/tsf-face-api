@@ -1,3 +1,4 @@
+/// <reference path="./types.d.ts" />
 import * as tf from "@tensorflow/tfjs-core";
 
 import { Dimensions } from "../classes/Dimensions";

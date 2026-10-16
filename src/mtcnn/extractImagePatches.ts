@@ -1,8 +1,7 @@
 import * as tf from "@tensorflow/tfjs-core";
 
 import { Box } from "../classes/Box";
-import { createCanvas, createCanvasFromMedia } from "../dom/createCanvas";
-import { getContext2dOrThrow } from "../dom/getContext2dOrThrow";
+import { createCanvas, createCanvasFromMedia, getContext2dOrThrow } from "../dom/NetInput";
 import { env } from "../env";
 import { normalize } from "../utils";
 

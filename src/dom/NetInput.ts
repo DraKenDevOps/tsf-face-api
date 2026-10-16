@@ -1,11 +1,7 @@
 import * as tf from "@tensorflow/tfjs-core";
-
-import { Dimensions } from "../classes/Dimensions";
 import { env } from "../env";
-import { padToSquare } from "../utils";
-import { computeReshapedDimensions, isTensor3D, isTensor4D, range } from "../utils";
-import { createCanvasFromMedia } from "./createCanvas";
-import { imageToSquare } from "./imageToSquare";
+import { computeReshapedDimensions, isTensor3D, isTensor4D, padToSquare, range } from "../utils";
+import { Dimensions } from "../classes/Dimensions";
 import { TResolvedNetInput } from "./types";
 
 export class NetInput {
@@ -144,4 +140,110 @@ export class NetInput {
       return batchTensor;
     });
   }
+}
+
+export function createCanvas({ width, height }: IDimensions): HTMLCanvasElement {
+  const { createCanvasElement } = env.getEnv();
+  const canvas = createCanvasElement();
+  canvas.width = width;
+  canvas.height = height;
+  return canvas;
+}
+
+export function isMediaElement(input: any) {
+  const { Image, Canvas, Video } = env.getEnv();
+  return input instanceof Image || input instanceof Canvas || input instanceof Video;
+}
+
+export function isMediaLoaded(media: HTMLImageElement | HTMLVideoElement): boolean {
+  const { Image, Video } = env.getEnv();
+  return (media instanceof Image && media.complete) || (media instanceof Video && media.readyState >= 3);
+}
+
+export function createCanvasFromMedia(media: HTMLImageElement | HTMLVideoElement | ImageData, dims?: IDimensions): HTMLCanvasElement {
+  const { ImageData } = env.getEnv();
+
+  if (!(media instanceof ImageData) && !isMediaLoaded(media)) {
+    throw new Error("createCanvasFromMedia - media has not finished loading yet");
+  }
+
+  const { width, height } = dims || getMediaDimensions(media);
+  const canvas = createCanvas({ width, height });
+
+  if (media instanceof ImageData) {
+    getContext2dOrThrow(canvas).putImageData(media, 0, 0);
+  } else {
+    getContext2dOrThrow(canvas).drawImage(media, 0, 0, width, height);
+  }
+  return canvas;
+}
+
+export function getContext2dOrThrow(canvasArg: string | HTMLCanvasElement | CanvasRenderingContext2D): CanvasRenderingContext2D {
+  const { Canvas, CanvasRenderingContext2D } = env.getEnv();
+
+  if (canvasArg instanceof CanvasRenderingContext2D) {
+    return canvasArg;
+  }
+
+  const canvas = resolveInput(canvasArg);
+
+  if (!(canvas instanceof Canvas)) {
+    throw new Error("resolveContext2d - expected canvas to be of instance of Canvas");
+  }
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    throw new Error("resolveContext2d - canvas 2d context is null");
+  }
+
+  return ctx;
+}
+
+export function resolveInput(arg: string | any) {
+  if (!env.isNodejs() && typeof arg === "string") {
+    return document.getElementById(arg);
+  }
+  return arg;
+}
+
+export function imageToSquare(input: HTMLImageElement | HTMLCanvasElement, inputSize: number, centerImage = false) {
+  const { Image, Canvas } = env.getEnv();
+
+  if (!(input instanceof Image || input instanceof Canvas)) {
+    throw new Error("imageToSquare - expected arg0 to be HTMLImageElement | HTMLCanvasElement");
+  }
+
+  const dims = getMediaDimensions(input);
+  const scale = inputSize / Math.max(dims.height, dims.width);
+  const width = scale * dims.width;
+  const height = scale * dims.height;
+
+  const targetCanvas = createCanvas({ width: inputSize, height: inputSize });
+  const inputCanvas = input instanceof Canvas ? input : createCanvasFromMedia(input);
+
+  const offset = Math.abs(width - height) / 2;
+  const dx = centerImage && width < height ? offset : 0;
+  const dy = centerImage && height < width ? offset : 0;
+  getContext2dOrThrow(targetCanvas).drawImage(inputCanvas, dx, dy, width, height);
+
+  return targetCanvas;
+}
+
+export function matchDimensions(input: IDimensions, reference: IDimensions, useMediaDimensions = false) {
+  const { width, height } = useMediaDimensions ? getMediaDimensions(reference) : reference;
+  input.width = width;
+  input.height = height;
+  return { width, height };
+}
+
+export function getMediaDimensions(input: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement | IDimensions): Dimensions {
+  const { Image, Video } = env.getEnv();
+
+  if (input instanceof Image) {
+    return new Dimensions(input.naturalWidth, input.naturalHeight);
+  }
+  if (input instanceof Video) {
+    return new Dimensions(input.videoWidth, input.videoHeight);
+  }
+  return new Dimensions(input.width, input.height);
 }

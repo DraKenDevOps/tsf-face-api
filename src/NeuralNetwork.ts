@@ -1,6 +1,6 @@
 import * as tf from "@tensorflow/tfjs-core";
 
-import { loadWeightMap } from "./dom/loadWeightMap";
+import { loadWeightMap } from "./dom";
 import { env } from "./env";
 import { getModelUris } from "./utils";
 

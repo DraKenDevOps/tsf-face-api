@@ -1,12 +1,12 @@
 import { Box } from "./Box";
 import { Dimensions } from "./Dimensions";
-import { Rect } from "./Rect";
+import { Rectangle } from "./Rectangle";
 
 export class ObjectDetection {
   private _score: number;
   private _classScore: number;
   private _className: string;
-  private _box: Rect;
+  private _box: Rectangle;
   private _imageDims: Dimensions;
 
   constructor(score: number, classScore: number, className: string, relativeBox: IRect, imageDims: IDimensions) {

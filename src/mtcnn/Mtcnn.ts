@@ -3,9 +3,9 @@ import * as tf from "@tensorflow/tfjs-core";
 import { FaceDetection } from "../classes/FaceDetection";
 import { FaceLandmarks5 } from "../classes/FaceLandmarks5";
 import { Point } from "../classes/Point";
-import { Rect } from "../classes/Rect";
+import { Rectangle } from "../classes/Rectangle";
+import { toNetInput } from "../dom";
 import { NetInput } from "../dom/NetInput";
-import { toNetInput } from "../dom/toNetInput";
 import { TNetInput } from "../dom/types";
 import { extendWithFaceDetection } from "../factories/WithFaceDetection";
 import { extendWithFaceLandmarks } from "../factories/WithFaceLandmarks";
@@ -16,7 +16,7 @@ import { CELL_SIZE } from "../utils/config";
 import { extractParams } from "./extractParams";
 import { extractParamsFromWeigthMap } from "./extractParamsFromWeigthMap";
 import { MtcnnOptions } from "./MtcnnOptions";
-import { pyramidDown } from "./pyramidDown";
+import { pyramidDown } from "./functions";
 import { stage1 } from "./stage1";
 import { stage2 } from "./stage2";
 import { stage3 } from "./stage3";
@@ -106,7 +106,7 @@ export class Mtcnn extends NeuralNetwork<NetParams> {
       extendWithFaceLandmarks(
         extendWithFaceDetection<{}>(
           {},
-          new FaceDetection(out3.scores[idx], new Rect(box.left / width, box.top / height, box.width / width, box.height / height), {
+          new FaceDetection(out3.scores[idx], new Rectangle(box.left / width, box.top / height, box.width / width, box.height / height), {
             height,
             width
           })

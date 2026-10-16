@@ -1,10 +1,10 @@
 import * as tf from "@tensorflow/tfjs-core";
 
 import { Box } from "../classes/Box";
-import { nonMaxSuppression } from "../ops/nonMaxSuppression";
+import { nonMaxSuppression } from "../ops";
 import { extractImagePatches } from "./extractImagePatches";
 import { MtcnnBox } from "./MtcnnBox";
-import { RNet } from "./RNet";
+import { RNet } from "./nets";
 import { RNetParams } from "./types";
 
 export async function stage2(img: HTMLCanvasElement, inputBoxes: Box[], scoreThreshold: number, params: RNetParams, stats: any) {

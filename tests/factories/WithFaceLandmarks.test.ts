@@ -1,6 +1,6 @@
-import { extendWithFaceDetection, extendWithFaceLandmarks, FaceDetection, FaceLandmarks68, Point, Rect } from '../../src';
+import { extendWithFaceDetection, extendWithFaceLandmarks, FaceDetection, FaceLandmarks68, Point, Rectangle } from '../../src';
 
-const detection = new FaceDetection(1.0, new Rect(0.5, 0.5, 0.5, 0.5), { width: 100, height: 100 })
+const detection = new FaceDetection(1.0, new Rectangle(0.5, 0.5, 0.5, 0.5), { width: 100, height: 100 })
 const unshiftedLandmarks = new FaceLandmarks68(Array(68).fill(0).map((_, i) => new Point(i / 100, i / 100)), { width: 100, height: 100 })
 
 const makeSrcObjectWithFaceDetection = <T> (srcObject: T) => extendWithFaceDetection(srcObject, detection)

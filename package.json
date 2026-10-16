@@ -43,7 +43,7 @@
     "tensorflow",
     "tfjs",
     "typescript",
-    "ts-face-api"
+    "tsf-face-api"
   ],
   "license": "MIT",
   "dependencies": {

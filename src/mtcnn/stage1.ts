@@ -2,12 +2,12 @@ import * as tf from "@tensorflow/tfjs-core";
 
 import { BoundingBox } from "../classes/BoundingBox";
 import { Point } from "../classes/Point";
-import { nonMaxSuppression } from "../ops/nonMaxSuppression";
+import { nonMaxSuppression } from "../ops";
 import { getSizesForScale } from "../utils";
 import { CELL_SIZE, CELL_STRIDE } from "../utils/config";
 import { MtcnnBox } from "./MtcnnBox";
 import { normalize } from "../utils";
-import { PNet } from "./PNet";
+import { PNet } from "./nets";
 import { PNetParams } from "./types";
 
 function rescaleAndNormalize(x: tf.Tensor4D, scale: number): tf.Tensor4D {

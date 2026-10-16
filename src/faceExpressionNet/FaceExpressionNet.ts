@@ -1,11 +1,11 @@
 import * as tf from "@tensorflow/tfjs-core";
 
+import { toNetInput } from "../dom";
 import { NetInput } from "../dom/NetInput";
-import { toNetInput } from "../dom/toNetInput";
 import { TNetInput } from "../dom/types";
-import { FaceFeatureExtractor } from "../faceFeatureExtractor/FaceFeatureExtractor";
+import { FaceFeatureExtractor } from "../faceFeatureExtractor";
 import { FaceFeatureExtractorParams } from "../faceFeatureExtractor/types";
-import { FaceProcessor } from "../faceProcessor/FaceProcessor";
+import { FaceProcessor } from "../faceProcessor";
 import { FaceExpressions } from "./FaceExpressions";
 
 export class FaceExpressionNet extends FaceProcessor<FaceFeatureExtractorParams> {
@@ -23,7 +23,7 @@ export class FaceExpressionNet extends FaceProcessor<FaceFeatureExtractorParams>
 
   public async predictExpressions(input: TNetInput) {
     const netInput = await toNetInput(input);
-    const out = await this.forwardInput(netInput);
+    const out = this.forwardInput(netInput);
     const probabilitesByBatch = await Promise.all(
       tf.unstack(out).map(async (t) => {
         const data = await t.data();

@@ -1,4 +1,5 @@
 import { isValidProbablitiy } from "../utils";
+import { Gender } from "../utils/config";
 
 export type WithGender<TSource> = TSource & {
   gender: Gender;

@@ -1,13 +1,13 @@
 import { Box } from '../../src/classes/Box';
-import { Rect } from '../../src/classes/Rect';
+import { Rectangle } from '../../src/classes/Rect';
 
 describe('Rect', () => {
 
   describe('constructor', () => {
 
     it('can be created', () => {
-      const rect = new Rect(0, 10, 20, 30)
-      expect(rect instanceof Rect).toBe(true)
+      const rect = new Rectangle(0, 10, 20, 30)
+      expect(rect instanceof Rectangle).toBe(true)
       expect(rect instanceof Box).toBe(true)
       expect(rect.x).toEqual(0)
       expect(rect.y).toEqual(10)
@@ -18,7 +18,7 @@ describe('Rect', () => {
     it('throws if coordinates are invalid', () => {
 
       const expectConstructorToThrow = (x: any, y: any, width: any, height: any) => {
-        expect(() => new Rect(x, y, width, height)).toThrowError(`Box.constructor - expected box to be IBoundingBox | IRect, instead have ${JSON.stringify({ x, y, width, height })}`)
+        expect(() => new Rectangle(x, y, width, height)).toThrowError(`Box.constructor - expected box to be IBoundingBox | IRect, instead have ${JSON.stringify({ x, y, width, height })}`)
       }
 
       expectConstructorToThrow(NaN, 10, 20, 30)
@@ -30,12 +30,12 @@ describe('Rect', () => {
     })
 
     it('throws if height or width invalid', () => {
-      expect(() => new Rect(0, 10, -20, 30, false)).toThrowError('Box.constructor - width (-20) and height (30) must be positive numbers')
-      expect(() => new Rect(0, 10, 20, -30, false)).toThrowError('Box.constructor - width (20) and height (-30) must be positive numbers')
+      expect(() => new Rectangle(0, 10, -20, 30)).toThrowError('Box.constructor - width (-20) and height (30) must be positive numbers')
+      expect(() => new Rectangle(0, 10, 20, -30)).toThrowError('Box.constructor - width (20) and height (-30) must be positive numbers')
     })
 
     it('properties', () => {
-      const rect = new Rect(5, 10, 15, 20)
+      const rect = new Rectangle(5, 10, 15, 20)
       expect(rect.left).toEqual(5)
       expect(rect.x).toEqual(5)
       expect(rect.top).toEqual(10)

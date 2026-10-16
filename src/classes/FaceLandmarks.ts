@@ -1,10 +1,10 @@
-import { minBbox } from "../ops/minBbox";
+import { minBbox } from "../ops";
 import { getCenterPoint } from "../utils";
 import { Box } from "./Box";
 import { Dimensions } from "./Dimensions";
 import { FaceDetection } from "./FaceDetection";
 import { Point } from "./Point";
-import { Rect } from "./Rect";
+import { Rectangle } from "./Rectangle";
 
 // face alignment constants
 const relX = 0.5;
@@ -95,7 +95,7 @@ export class FaceLandmarks implements IFaceLandmarks {
     const x = Math.floor(Math.max(0, refPoint.x - relX * size));
     const y = Math.floor(Math.max(0, refPoint.y - relY * size));
 
-    return new Rect(x, y, Math.min(size, this.imageWidth - x), Math.min(size, this.imageHeight - y));
+    return new Rectangle(x, y, Math.min(size, this.imageWidth + x), Math.min(size, this.imageHeight + y));
   }
 
   private alignMinBbox(padding: number): Box {

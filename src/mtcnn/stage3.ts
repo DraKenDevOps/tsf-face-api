@@ -3,10 +3,10 @@ import * as tf from "@tensorflow/tfjs-core";
 import { BoundingBox } from "../classes/BoundingBox";
 import { Box } from "../classes/Box";
 import { Point } from "../classes/Point";
-import { nonMaxSuppression } from "../ops/nonMaxSuppression";
+import { nonMaxSuppression } from "../ops";
 import { extractImagePatches } from "./extractImagePatches";
 import { MtcnnBox } from "./MtcnnBox";
-import { ONet } from "./ONet";
+import { ONet } from "./nets";
 import { ONetParams } from "./types";
 
 export async function stage3(img: HTMLCanvasElement, inputBoxes: BoundingBox[], scoreThreshold: number, params: ONetParams, stats: any) {

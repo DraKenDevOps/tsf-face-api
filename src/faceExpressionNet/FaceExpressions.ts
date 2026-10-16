@@ -1,13 +1,13 @@
 export const FACE_EXPRESSION_LABELS = ["neutral", "happy", "sad", "angry", "fearful", "disgusted", "surprised"];
 
 export class FaceExpressions {
-  public neutral: number;
-  public happy: number;
-  public sad: number;
-  public angry: number;
-  public fearful: number;
-  public disgusted: number;
-  public surprised: number;
+  public neutral!: number;
+  public happy!: number;
+  public sad!: number;
+  public angry!: number;
+  public fearful!: number;
+  public disgusted!: number;
+  public surprised!: number;
 
   constructor(probabilities: number[] | Float32Array) {
     if (probabilities.length !== 7) {

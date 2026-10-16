@@ -1,4 +1,4 @@
-import { createCanvasFromMedia, env, extractFaces, Rect } from '../../src';
+import { createCanvasFromMedia, env, extractFaces, Rectangle } from '../../src';
 import { getTestEnv } from '../env';
 
 describe('extractFaces', () => {
@@ -14,7 +14,7 @@ describe('extractFaces', () => {
   describe('extracts canvases', () => {
 
     it('HTMLImageElement, single box', async () => {
-      const rect = new Rect(0, 0, 50, 60)
+      const rect = new Rectangle(0, 0, 50, 60)
       const canvases = await extractFaces(imgEl, [rect])
 
       expect(canvases.length).toEqual(1)
@@ -25,8 +25,8 @@ describe('extractFaces', () => {
 
     it('HTMLImageElement, multiple boxes', async () => {
       const rects = [
-        new Rect(0, 0, 50, 60),
-        new Rect(50, 50, 70, 80),
+        new Rectangle(0, 0, 50, 60),
+        new Rectangle(50, 50, 70, 80),
       ]
       const canvases = await extractFaces(imgEl, rects)
 
@@ -40,7 +40,7 @@ describe('extractFaces', () => {
     })
 
     it('HTMLCanvasElement, single box', async () => {
-      const rect = new Rect(0, 0, 50, 60)
+      const rect = new Rectangle(0, 0, 50, 60)
       const canvases = await extractFaces(canvasEl, [rect])
 
       expect(canvases.length).toEqual(1)
@@ -51,8 +51,8 @@ describe('extractFaces', () => {
 
     it('HTMLCanvasElement, multiple boxes', async () => {
       const rects = [
-        new Rect(0, 0, 50, 60),
-        new Rect(50, 50, 70, 80),
+        new Rectangle(0, 0, 50, 60),
+        new Rectangle(50, 50, 70, 80),
       ]
       const canvases = await extractFaces(canvasEl, rects)
 
@@ -70,7 +70,7 @@ describe('extractFaces', () => {
   describe('box out of image borders', () => {
 
     it('clips upper left corner', async () => {
-      const rect = new Rect(-10, -10, 110, 110)
+      const rect = new Rectangle(-10, -10, 110, 110)
       const canvases = await extractFaces(imgEl, [rect])
 
       expect(canvases[0].width).toEqual(100)
@@ -78,7 +78,7 @@ describe('extractFaces', () => {
     })
 
     it('clips bottom right corner', async () => {
-      const rect = new Rect(imgEl.width - 100, imgEl.height - 100, 110, 110)
+      const rect = new Rectangle(imgEl.width - 100, imgEl.height - 100, 110, 110)
       const canvases = await extractFaces(imgEl, [rect])
 
       expect(canvases[0].width).toEqual(100)
@@ -86,7 +86,7 @@ describe('extractFaces', () => {
     })
 
     it('clips upper left and bottom right corners', async () => {
-      const rect = new Rect(-10, -10, imgEl.width + 20, imgEl.height + 20)
+      const rect = new Rectangle(-10, -10, imgEl.width + 20, imgEl.height + 20)
       const canvases = await extractFaces(imgEl, [rect])
 
       expect(canvases[0].width).toEqual(imgEl.width)

@@ -1,9 +1,9 @@
 import * as tf from "@tensorflow/tfjs-core";
 
 import { FaceDetection } from "../classes/FaceDetection";
-import { Rect } from "../classes/Rect";
+import { Rectangle } from "../classes/Rectangle";
+import { toNetInput } from "../dom";
 import { NetInput } from "../dom/NetInput";
-import { toNetInput } from "../dom/toNetInput";
 import { TNetInput } from "../dom/types";
 import { NeuralNetwork } from "../NeuralNetwork";
 import { extractParams } from "./extractParams";
@@ -71,7 +71,7 @@ export class SsdMobilenetv1 extends NeuralNetwork<NetParams> {
     const results = indices.map((idx) => {
       const [top, bottom] = [Math.max(0, boxesData[idx][0]), Math.min(1.0, boxesData[idx][2])].map((val) => val * padY);
       const [left, right] = [Math.max(0, boxesData[idx][1]), Math.min(1.0, boxesData[idx][3])].map((val) => val * padX);
-      return new FaceDetection(scoresData[idx], new Rect(left, top, right - left, bottom - top), {
+      return new FaceDetection(scoresData[idx], new Rectangle(left, top, right - left, bottom - top), {
         height: netInput.getInputHeight(0),
         width: netInput.getInputWidth(0)
       });
