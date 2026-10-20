@@ -7,26 +7,6 @@ import * as utils from "./utils";
 import * as draw from "./draw";
 
 export { utils, draw, tf };
-export type {
-  IBoundingBox,
-  IDimensions,
-  IFaceMatch,
-  IPoint,
-  IRect,
-  IDrawBoxOptions,
-  IDrawFaceLandmarksOptions,
-  IDrawTextFieldOptions,
-  IMtcnnOptions,
-  ISsdMobilenetv1Options,
-  ITinyYolov2Options,
-  AgeAndGenderPrediction,
-  ParamMapping,
-  ExtractWeightsFunction,
-  IFileSystem,
-  Environment,
-  WithAge,
-  WithFaceDescriptor
-};
 
 export * from "./ageGenderNet";
 export * from "./ageGenderNet/types";

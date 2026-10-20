@@ -40,7 +40,7 @@ const modelPath = path.resolve(process.cwd() + "/weights");
   console.time("recognize");
   const single = await faceapi.detectSingleFace(angryImg, faceDetectionOptions).withFaceLandmarks().withFaceDescriptor();
   // const all = await faceapi.detectAllFaces(facesImg, faceDetectionOptions).withFaceLandmarks().withFaceDescriptors();
-  console.log(single.detection.score);
+  console.log(single?.detection.score);
   // console.log("single", Array.from(single?.descriptor || []));
   // console.log("all", all.map((f) => Array.from(f.descriptor)));
   console.timeEnd("recognize");
