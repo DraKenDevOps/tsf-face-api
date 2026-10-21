@@ -58,6 +58,7 @@
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.1.2",
     "@tensorflow/tfjs-node": "^4.22.0",
+    "@tensorflow/tfjs-node-gpu": "^4.22.0",
     "@types/node": "^22.13.0",
     "@vitest/browser": "^3.0.0",
     "canvas": "^3.1.0",
@@ -70,10 +71,14 @@
   },
   "peerDependencies": {
     "@tensorflow/tfjs-node": ">=4.0.0",
+    "@tensorflow/tfjs-node-gpu": ">=4.0.0",
     "canvas": ">=2.11.0 || >=3.0.0"
   },
   "peerDependenciesMeta": {
     "@tensorflow/tfjs-node": {
+      "optional": true
+    },
+    "@tensorflow/tfjs-node-gpu": {
       "optional": true
     },
     "canvas": {

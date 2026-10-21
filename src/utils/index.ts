@@ -73,11 +73,43 @@ export function inverseSigmoid(x: number) {
   return Math.log(x / (1 - x));
 }
 
+/**
+ * Computes the euclidean distance between two descriptor vectors.
+ *
+ * @param arr1 The first descriptor array or Float32Array.
+ * @param arr2 The second descriptor array or Float32Array.
+ * @returns The euclidean distance between arr1 and arr2.
+ * 
+ * Result < 0.6 thats mean two descriptor vectors are similar.
+ */
 export function euclideanDistance(arr1: number[] | Float32Array, arr2: number[] | Float32Array) {
   if (arr1.length !== arr2.length) throw new Error("euclideanDistance: arr1.length !== arr2.length");
   const desc1 = Array.from(arr1);
   const desc2 = Array.from(arr2);
   return Math.sqrt(desc1.map((val, i) => val - desc2[i]).reduce((res, diff) => res + Math.pow(diff, 2), 0));
+}
+
+/**
+ * Computes the cosine similarity between two descriptor vectors.
+ *
+ * @param arr1 The first descriptor array or Float32Array.
+ * @param arr2 The second descriptor array or Float32Array.
+ * @returns The cosine similarity between arr1 and arr2 in the range [-1, 1].
+ * 
+ * Result > 0.6~0.7 thats mean two descriptor vectors are similar.
+ */
+export function cosineSimilarity(arr1: number[] | Float32Array, arr2: number[] | Float32Array): number {
+  if (arr1.length !== arr2.length) throw new Error("cosineSimilarity: arr1.length !== arr2.length");
+  let dot = 0,
+    norm1 = 0,
+    norm2 = 0;
+  for (let i = 0; i < arr1.length; i++) {
+    dot += arr1[i] * arr2[i];
+    norm1 += arr1[i] * arr1[i];
+    norm2 += arr2[i] * arr2[i];
+  }
+  const denom = Math.sqrt(norm1) * Math.sqrt(norm2);
+  return denom === 0 ? 0 : dot / denom;
 }
 
 export function extractWeightsFactory(weights: Float32Array) {

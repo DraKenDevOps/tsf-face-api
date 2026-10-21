@@ -10,9 +10,16 @@ const __dirname = path.dirname(__filename);
 
 async function setupNodeEnv() {
   try {
-    await import('@tensorflow/tfjs-node');
+    await import("@tensorflow/tfjs-node-gpu");
   } catch {
-    // Fallback to CPU backend registered via src/index.ts if native tfjs-node addon is not built
+    console.warn("No GPU (T_T)");
+    try {
+      console.warn("Use CPU (^_^)");
+      await import("@tensorflow/tfjs-node");
+    } catch (err) {
+      console.error(err);
+      console.log('Fallback to CPU backend registered via src/index.ts if native tfjs-node addon is not built')
+    }
   }
 
   try {

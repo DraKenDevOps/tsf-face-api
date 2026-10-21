@@ -52,7 +52,7 @@ export class DetectAllFacesTask extends DetectFacesTaskBase<FaceDetection[]> {
     });
   }
 
-  withFaceLandmarks(useTinyLandmarkNet = false) {
+  withFaceLandmarks(useTinyLandmarkNet = true) {
     return new DetectAllFaceLandmarksTask(this.runAndExtendWithFaceDetections(), this.input, useTinyLandmarkNet);
   }
 

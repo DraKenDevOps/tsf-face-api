@@ -1,5 +1,6 @@
 allowBuilds:
   '@tensorflow/tfjs-node': false
+  '@tensorflow/tfjs-node-gpu': false
   canvas: true
   core-js: false
   esbuild: true
